@@ -39,7 +39,7 @@ async function loadMoreProducts() {
 	});
 }
 
-export function scrollFunction() {
+export function scrollHandler() {
 	if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 		TO_TOP_BTN.style.display = 'block';
 	}
@@ -48,7 +48,7 @@ export function scrollFunction() {
 	}
 }
 
-export function toTopFunction() {
+export function scrollToTop() {
 	document.body.scrollTop = 0;
 	document.documentElement.scrollTop = 0;
 }
