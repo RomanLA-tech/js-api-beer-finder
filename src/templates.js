@@ -1,3 +1,5 @@
+import {API, PRODUCTS_LIST, SEARCH_INPUT} from './consts';
+
 export function getProductCardTemplate(product) {
 	const productCard = document.createElement('article');
 	productCard.classList.add('product__container');
@@ -35,4 +37,18 @@ export function getNoItemLeftMessage() {
 	noItemsLeftMessage.innerText = 'No items left';
 	
 	return noItemsLeftMessage;
+}
+
+export function getRecentlySearchedItem(value) {
+	const element = document.createElement('button');
+	element.classList.add('recently-searched-btn');
+	element.innerText = value;
+	element.addEventListener('click', () => {
+		API.getProductByQuery({query: value}).then((res) => {
+			SEARCH_INPUT.value = value;
+			PRODUCTS_LIST.renderProductList(res);
+		});
+	});
+	
+	return element;
 }
