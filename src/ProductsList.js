@@ -1,5 +1,6 @@
 import {getProductCardTemplate} from './templates';
 import {NO_PRODUCTS_MESSAGE, PRODUCTS_LIST_ELEMENT} from './consts';
+import {appendLoadMoreBtn} from './utils';
 
 export class ProductsList {
 	
@@ -12,6 +13,7 @@ export class ProductsList {
 			products.forEach(product => {
 				this.#renderSingleProduct(product);
 			});
+			appendLoadMoreBtn();
 		}
 	}
 	

@@ -136,6 +136,11 @@ main {
     align-self: center;
 }
 
+.products-list__container:last-child {
+
+}
+
+
 .product__container {
     display: flex;
     flex-direction: column;
@@ -149,7 +154,15 @@ main {
     font-weight: 400;
     margin-bottom: 1rem;
     color: var(--purple);
-    height: 40px;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
 }
 
 .product-card__image {
@@ -167,6 +180,46 @@ main {
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-clamp: 4;
+}
+
+.load-more-container {
+    background-color: black;
+    width: 100%;
+    height: 10px;
+}
+
+.load-more-btn {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.no-items-left-message {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.to-top-btn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    cursor: pointer;
+    font-size: 3rem;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#myBtn:hover {
+    background-color: #555;
 }
 
 

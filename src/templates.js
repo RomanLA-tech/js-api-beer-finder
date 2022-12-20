@@ -19,3 +19,20 @@ export function getProductCardTemplate(product) {
 	
 	return productCard;
 }
+
+export function getLoadMoreButton() {
+	const loadMoreBtn = document.createElement('button');
+	loadMoreBtn.classList.add('load-more-btn');
+	loadMoreBtn.innerText = 'load more';
+	loadMoreBtn.id = 'load-more-btn';
+	
+	return loadMoreBtn;
+}
+
+export function getNoItemLeftMessage() {
+	const noItemsLeftMessage = document.createElement('h3');
+	noItemsLeftMessage.classList.add('no-items-left-message');
+	noItemsLeftMessage.innerText = 'No items left';
+	
+	return noItemsLeftMessage;
+}

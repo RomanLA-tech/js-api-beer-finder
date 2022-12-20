@@ -1,6 +1,6 @@
 import '../src/styles.css';
-import {SEARCH_FORM} from './consts';
-import {getProducts} from './utils';
+import {SEARCH_FORM, TO_TOP_BTN} from './consts';
+import {getProducts, scrollFunction, toTopFunction} from './utils';
 
 window.addEventListener('load', () => {
 	
@@ -8,4 +8,9 @@ window.addEventListener('load', () => {
 		e.preventDefault();
 		getProducts();
 	});
+	
+	
+	window.addEventListener('scroll', scrollFunction);
+	
+	TO_TOP_BTN.addEventListener('click', toTopFunction);
 });

@@ -1,5 +1,6 @@
 import {BASE_URL} from './consts';
 
+
 export class Api {
 	
 	getProductByQuery({query, page = 1, pageSize = 10}) {
