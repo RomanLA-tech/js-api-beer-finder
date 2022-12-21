@@ -1,5 +1,6 @@
 import {
-	API, FAVORITES_LIST,
+	API,
+	FAVORITES_LIST,
 	PRODUCTS_LIST,
 	PRODUCTS_LIST_ELEMENT,
 	RECENT_SEARCHES_LIST,
@@ -69,10 +70,10 @@ export function renderRecentlySearchedList(items) {
 		RECENTLY_SEARCHED_LIST_ELEMENT.removeChild(RECENTLY_SEARCHED_LIST_ELEMENT.lastChild);
 	}
 	const recentlyList = document.createElement('div');
-	const recentlyListTitle = document.createElement('h4')
+	const recentlyListTitle = document.createElement('h4');
 	
-	recentlyListTitle.innerText = 'Recent searches'
-	recentlyList.append(recentlyListTitle)
+	recentlyListTitle.innerText = 'Recent searches';
+	recentlyList.append(recentlyListTitle);
 	
 	RECENTLY_SEARCHED_LIST_ELEMENT.append(recentlyList);
 	Array.from(items).forEach((item) => {
@@ -81,12 +82,12 @@ export function renderRecentlySearchedList(items) {
 }
 
 export function addToFavorites(id) {
-	FAVORITES_LIST.add(id)
-	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS)
-	console.log(FAVORITES_LIST)
+	FAVORITES_LIST.add(id);
+	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
+	console.log(FAVORITES_LIST);
 }
 
 export function removeFromFavorites(id) {
-	FAVORITES_LIST.delete(id)
-	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS)
+	FAVORITES_LIST.delete(id);
+	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
 }
