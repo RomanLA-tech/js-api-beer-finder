@@ -1,5 +1,9 @@
 export class Store {
 	
+	getLoadedProducts() {
+		return JSON.parse(localStorage.getItem('loaded') || '[]');
+	}
+	
 	getRecentlySearched() {
 		return JSON.parse(localStorage.getItem('recently') || '[]');
 	}
@@ -10,8 +14,15 @@ export class Store {
 	
 	saveFavorite(id) {
 		const oldState = this.getFavorites();
+		console.log(this.getFavorites())
 		const newState = new Set([id, ...oldState]);
 		localStorage.setItem('favorites', JSON.stringify([...newState]));
+	}
+	
+	saveLoadedProducts(items) {
+		const oldState = this.getLoadedProducts();
+		const newState = new Set([...items, ...oldState]);
+		localStorage.setItem('loaded', JSON.stringify([...newState]));
 	}
 	
 	saveRecentlySearched(value) {
@@ -24,5 +35,9 @@ export class Store {
 		const state = this.getFavorites();
 		const newState = state.filter(item => item !== id);
 		localStorage.setItem('favorites', JSON.stringify(newState));
+	}
+	
+	clearLoadedProducts() {
+		localStorage.setItem('loaded', JSON.stringify([]))
 	}
 }

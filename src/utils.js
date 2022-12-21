@@ -4,16 +4,15 @@ import {
 } from './consts';
 
 let CURRENT_PAGE = 1;
-export let LOADED_PRODUCTS = [];
 
 export async function getProducts() {
-	LOADED_PRODUCTS.length = 0;
+	STORE.clearLoadedProducts()
 	CURRENT_PAGE = 1;
 	const query = SEARCH_INPUT.value;
 	const products = API.getProductByQuery({query});
 	await products.then(items => {
-		LOADED_PRODUCTS = [...items];
-		PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
+		STORE.saveLoadedProducts(items)
+		PRODUCTS_LIST.renderProductList(STORE.getLoadedProducts());
 		PRODUCTS_LIST_ELEMENT.scrollIntoView();
 		STORE.saveRecentlySearched(query);
 		renderRecentlySearchedList(STORE.getRecentlySearched());
@@ -31,14 +30,14 @@ async function loadMoreProducts() {
 	let page = ++CURRENT_PAGE;
 	await API.getProductByQuery({query, page}).then((res) => {
 		if (res.length < 10) {
-			LOADED_PRODUCTS = [...LOADED_PRODUCTS, ...res];
-			PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
+			STORE.saveLoadedProducts(...res)
+			PRODUCTS_LIST.renderProductList(STORE.getLoadedProducts());
 			PRODUCTS_LIST_ELEMENT.removeChild(PRODUCTS_LIST_ELEMENT.lastChild);
 			PRODUCTS_LIST_ELEMENT.append(getNoItemLeftMessage());
 		}
 		else {
-			LOADED_PRODUCTS = [...LOADED_PRODUCTS, ...res];
-			PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
+			STORE.saveLoadedProducts(...res)
+			PRODUCTS_LIST.renderProductList(STORE.getLoadedProducts());
 		}
 	});
 }
@@ -68,7 +67,7 @@ export function renderRecentlySearchedList(items) {
 	recentlyList.append(recentlyListTitle);
 	
 	RECENTLY_SEARCHED_LIST_ELEMENT.append(recentlyList);
-	Array.from(items).forEach((item) => {
+	items.forEach((item) => {
 		recentlyList.append(getRecentlySearchedItem(item));
 	});
 }

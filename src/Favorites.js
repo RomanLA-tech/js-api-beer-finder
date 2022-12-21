@@ -1,6 +1,5 @@
 import {API, MODAL_CONTENT, MODAL_WINDOW, PRODUCTS_LIST, STORE} from './consts';
 import {getProductCardTemplate} from './templates';
-import {LOADED_PRODUCTS} from './utils';
 
 export class Favorites {
 	
@@ -31,7 +30,7 @@ export class Favorites {
 	addToFavorites(id) {
 		STORE.saveFavorite(id);
 		this.cachedFavorites = STORE.getFavorites();
-		PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
+		PRODUCTS_LIST.renderProductList(STORE.getLoadedProducts());
 		if (MODAL_WINDOW.children.length !== 0) {
 			this.renderFavoritesProducts(STORE.getFavorites());
 		}
@@ -39,7 +38,7 @@ export class Favorites {
 	
 	removeFromFavorites(id) {
 		STORE.removeFromFavorites(id);
-		PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
+		PRODUCTS_LIST.renderProductList(STORE.getLoadedProducts());
 		if (MODAL_WINDOW.children.length !== 0) {
 			this.renderFavoritesProducts(this.cachedFavorites);
 		}

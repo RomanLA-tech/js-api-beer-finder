@@ -88,7 +88,7 @@ function getAddToFavoriteBtn(id) {
 	addToFavoriteBtn.classList.add('product-card__add-to-favorites-btn');
 	if (STORE.getFavorites().includes(id)) {
 		addToFavoriteBtn.addEventListener('click', () => {
-			new Favorites(STORE.getFavorites()).removeFromFavorites(id);
+			new Favorites().removeFromFavorites(id);
 		});
 		addToFavoriteBtn.innerText = 'Remove';
 		addToFavoriteBtn.classList.add('delete-btn');
