@@ -183,6 +183,19 @@ main {
     margin-bottom: 1rem;
 }
 
+.product-card__add-to-favorites-btn {
+    background-color: var(--light);
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    padding: 5px;
+    margin: 0.5rem;
+}
+
+.delete-btn {
+    background-color: firebrick;
+    color: var(--light);
+}
+
 .product_card__description {
     text-align: center;
     font-size: 1rem;

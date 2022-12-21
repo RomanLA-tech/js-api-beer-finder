@@ -7,6 +7,7 @@ export const PRODUCTS_LIST = new ProductsList();
 export const API = new Api();
 
 export const RECENT_SEARCHES_LIST = new Set();
+export const FAVORITES_LIST = new Set();
 
 export const SEARCH_FORM = document.getElementById('search-form');
 export const SEARCH_INPUT = document.getElementById('search-input');

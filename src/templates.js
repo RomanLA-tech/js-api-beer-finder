@@ -1,4 +1,5 @@
-import {API, PRODUCTS_LIST, SEARCH_INPUT} from './consts';
+import {API, FAVORITES_LIST, PRODUCTS_LIST, SEARCH_INPUT} from './consts';
+import {addToFavorites, removeFromFavorites} from './utils';
 
 export function getProductCardTemplate(product) {
 	const productCard = document.createElement('article');
@@ -13,11 +14,27 @@ export function getProductCardTemplate(product) {
 	cardImage.classList.add('product-card__image');
 	cardImage.src = product.image_url;
 	
+	const addToFavoriteBtn = document.createElement('button');
+	addToFavoriteBtn.classList.add('product-card__add-to-favorites-btn');
+	if (FAVORITES_LIST.has(product.id)) {
+		addToFavoriteBtn.addEventListener('click', () => {
+			removeFromFavorites(product.id);
+		});
+		addToFavoriteBtn.innerText = 'Remove';
+		addToFavoriteBtn.classList.add('delete-btn');
+	}
+	else {
+		addToFavoriteBtn.addEventListener('click', () => {
+			addToFavorites(product.id);
+		});
+		addToFavoriteBtn.innerText = 'Add to favorites';
+	}
+	
 	const cardDescription = document.createElement('p');
 	cardDescription.classList.add('product_card__description');
 	cardDescription.innerText = product.description;
 	
-	productCard.append(cardTitle, cardImage, cardDescription);
+	productCard.append(cardTitle, cardImage, addToFavoriteBtn, cardDescription);
 	
 	return productCard;
 }
