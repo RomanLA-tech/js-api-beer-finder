@@ -1,5 +1,5 @@
 import {
-	API,
+	API, FAVORITES_LIST,
 	PRODUCTS_LIST,
 	PRODUCTS_LIST_ELEMENT,
 	RECENT_SEARCHES_LIST,
@@ -78,4 +78,15 @@ export function renderRecentlySearchedList(items) {
 	Array.from(items).forEach((item) => {
 		recentlyList.append(getRecentlySearchedItem(item));
 	});
+}
+
+export function addToFavorites(id) {
+	FAVORITES_LIST.add(id)
+	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS)
+	console.log(FAVORITES_LIST)
+}
+
+export function removeFromFavorites(id) {
+	FAVORITES_LIST.delete(id)
+	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS)
 }
