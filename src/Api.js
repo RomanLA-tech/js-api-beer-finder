@@ -9,7 +9,7 @@ export class Api {
 					return response.json();
 				});
 		} catch (e) {
-			return e.message;
+			return e.message; //Some Comment 
 		}
 	}
 	
