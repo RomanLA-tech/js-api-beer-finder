@@ -1,9 +1,5 @@
 import {
 	API,
-	FAVORITES,
-	FAVORITES_LIST,
-	MODAL,
-	MODAL_WINDOW,
 	PRODUCTS_LIST,
 	PRODUCTS_LIST_ELEMENT,
 	RECENT_SEARCHES_LIST,
@@ -15,7 +11,7 @@ import {getLoadMoreButton, getNoItemLeftMessage, getRecentlySearchedItem} from '
 
 
 let CURRENT_PAGE = 1;
-let LOADED_PRODUCTS = [];
+export let LOADED_PRODUCTS = [];
 
 export async function getProducts() {
 	LOADED_PRODUCTS.length = 0;
@@ -82,17 +78,4 @@ export function renderRecentlySearchedList(items) {
 	Array.from(items).forEach((item) => {
 		recentlyList.append(getRecentlySearchedItem(item));
 	});
-}
-
-export function addToFavorites(id) {
-	FAVORITES_LIST.add(id);
-	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
-}
-
-export function removeFromFavorites(id) {
-	FAVORITES_LIST.delete(id);
-	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
-	if (MODAL_WINDOW.children.length !== 0) {
-		FAVORITES.renderFavoritesProducts();
-	}
 }

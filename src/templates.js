@@ -1,5 +1,5 @@
 import {API, FAVORITES_LIST, PRODUCTS_LIST, SEARCH_INPUT} from './consts';
-import {addToFavorites, removeFromFavorites} from './utils';
+import {Favorites} from './Favorites';
 
 export function getProductCardTemplate(product) {
 	const productCard = document.createElement('article');
@@ -18,14 +18,14 @@ export function getProductCardTemplate(product) {
 	addToFavoriteBtn.classList.add('product-card__add-to-favorites-btn');
 	if (FAVORITES_LIST.has(product.id)) {
 		addToFavoriteBtn.addEventListener('click', () => {
-			removeFromFavorites(product.id);
+			new Favorites(FAVORITES_LIST).removeFromFavorites(product.id);
 		});
 		addToFavoriteBtn.innerText = 'Remove';
 		addToFavoriteBtn.classList.add('delete-btn');
 	}
 	else {
 		addToFavoriteBtn.addEventListener('click', () => {
-			addToFavorites(product.id);
+			new Favorites(FAVORITES_LIST).addToFavorites(product.id);
 		});
 		addToFavoriteBtn.innerText = 'Add to favorites';
 	}

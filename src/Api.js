@@ -1,4 +1,4 @@
-import {BASE_URL, FAVORITES_LIST} from './consts';
+import {BASE_URL} from './consts';
 
 export class Api {
 	
@@ -13,12 +13,8 @@ export class Api {
 		}
 	}
 	
-	#getRequestString({page, pageSize, query}) {
-		return `${BASE_URL}?page=${page}&per_page=${pageSize}&beer_name=${query}`;
-	}
-	
-	getProductsByIds() {
-		const ids = this.#getFavoritesIdsString();
+	getProductsByIds(productsIds) {
+		const ids = this.#getFavoritesIdsString(productsIds);
 		try {
 			return fetch(`${BASE_URL}${ids}`).then((response) => {
 				return response.json();
@@ -28,7 +24,11 @@ export class Api {
 		}
 	}
 	
-	#getFavoritesIdsString() {
-		return Array.from(FAVORITES_LIST).reduce((acc, cur) => acc + `${cur}|`, '?ids=');
+	#getRequestString({page, pageSize, query}) {
+		return `${BASE_URL}?page=${page}&per_page=${pageSize}&beer_name=${query}`;
+	}
+	
+	#getFavoritesIdsString(productsIds) {
+		return productsIds.reduce((acc, cur) => acc + `${cur}|`, '?ids=');
 	}
 }

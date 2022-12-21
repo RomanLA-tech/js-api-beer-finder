@@ -1,6 +1,7 @@
 import '../src/styles.css';
-import {FAVORITES, MODAL, OPEN_MODAL_BTN, SEARCH_FORM, TO_TOP_BTN} from './consts';
+import {FAVORITES_LIST, MODAL, OPEN_MODAL_BTN, SEARCH_FORM, TO_TOP_BTN} from './consts';
 import {getProducts, scrollHandler, scrollToTop,} from './utils';
+import {Favorites} from './Favorites';
 
 window.addEventListener('load', () => {
 	
@@ -13,7 +14,7 @@ window.addEventListener('load', () => {
 	
 	OPEN_MODAL_BTN.addEventListener('click', () => {
 		MODAL.openModal();
-		FAVORITES.renderFavoritesProducts();
+		new	Favorites(FAVORITES_LIST).renderFavoritesProducts();
 	});
 	
 	TO_TOP_BTN.addEventListener('click', scrollToTop);
