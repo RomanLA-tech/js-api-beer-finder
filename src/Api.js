@@ -2,7 +2,7 @@ import {BASE_URL} from './consts';
 
 export class Api {
 	
-	getProductByQuery({query, page = 1, pageSize = 10}) {
+	getProductByQuery({query, page = 1, pageSize = 9}) {
 		try {
 			return fetch(this.#getRequestString({page, query, pageSize}))
 				.then((response) => {

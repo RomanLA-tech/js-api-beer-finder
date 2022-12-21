@@ -1,10 +1,17 @@
 import {
-	API, LOADED_PRODUCTS, PRODUCTS_LIST, PRODUCTS_LIST_ELEMENT, SEARCH_INPUT, TO_TOP_BTN
+	API,
+	PRODUCTS_LIST,
+	PRODUCTS_LIST_ELEMENT,
+	RECENT_SEARCHES_LIST,
+	RECENTLY_SEARCHED_LIST_ELEMENT,
+	SEARCH_INPUT,
+	TO_TOP_BTN
 } from './consts';
-import {getLoadMoreButton, getNoItemLeftMessage} from './templates';
+import {getLoadMoreButton, getNoItemLeftMessage, getRecentlySearchedItem} from './templates';
 
 
 let CURRENT_PAGE = 1;
+let LOADED_PRODUCTS = [];
 
 export async function getProducts() {
 	LOADED_PRODUCTS.length = 0;
@@ -12,9 +19,11 @@ export async function getProducts() {
 	const query = SEARCH_INPUT.value;
 	const products = API.getProductByQuery({query});
 	await products.then(items => {
-		LOADED_PRODUCTS.push(...items);
+		LOADED_PRODUCTS = [...items];
 		PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
 		PRODUCTS_LIST_ELEMENT.scrollIntoView();
+		RECENT_SEARCHES_LIST.add(query);
+		renderRecentlySearchedList(RECENT_SEARCHES_LIST);
 	});
 }
 
@@ -28,12 +37,14 @@ async function loadMoreProducts() {
 	const query = SEARCH_INPUT.value;
 	let page = ++CURRENT_PAGE;
 	await API.getProductByQuery({query, page}).then((res) => {
-		if (res.length === 0) {
+		if (res.length < 10) {
+			LOADED_PRODUCTS = [...LOADED_PRODUCTS, ...res];
+			PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
 			PRODUCTS_LIST_ELEMENT.removeChild(PRODUCTS_LIST_ELEMENT.lastChild);
 			PRODUCTS_LIST_ELEMENT.append(getNoItemLeftMessage());
 		}
 		else {
-			LOADED_PRODUCTS.push(...res);
+			LOADED_PRODUCTS = [...LOADED_PRODUCTS, ...res];
 			PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
 		}
 	});
@@ -51,4 +62,20 @@ export function scrollHandler() {
 export function scrollToTop() {
 	document.body.scrollTop = 0;
 	document.documentElement.scrollTop = 0;
+}
+
+export function renderRecentlySearchedList(items) {
+	if (RECENTLY_SEARCHED_LIST_ELEMENT.children.length > 0) {
+		RECENTLY_SEARCHED_LIST_ELEMENT.removeChild(RECENTLY_SEARCHED_LIST_ELEMENT.lastChild);
+	}
+	const recentlyList = document.createElement('div');
+	const recentlyListTitle = document.createElement('h4')
+	
+	recentlyListTitle.innerText = 'Recent searches'
+	recentlyList.append(recentlyListTitle)
+	
+	RECENTLY_SEARCHED_LIST_ELEMENT.append(recentlyList);
+	Array.from(items).forEach((item) => {
+		recentlyList.append(getRecentlySearchedItem(item));
+	});
 }
