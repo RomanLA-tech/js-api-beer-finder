@@ -238,6 +238,41 @@ main {
     border-radius: 10px;
 }
 
+/*MODAL*/
+.modal__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    margin-top: 2rem;
+    padding: 2rem;
+    min-height: 600px;
+    width: 70vw;
+    background: var(--darker);
+    border-radius: 1rem;
+    z-index: 100;
+}
+
+#modal-content {
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    width: 50vw;
+    justify-content: space-between;
+}
+
+.no-items-message {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-align: center;
+    width: 100%;
+}
+
+.hide {
+    display: none;
+}
+
 
 
 

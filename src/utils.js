@@ -1,6 +1,9 @@
 import {
 	API,
+	FAVORITES,
 	FAVORITES_LIST,
+	MODAL,
+	MODAL_WINDOW,
 	PRODUCTS_LIST,
 	PRODUCTS_LIST_ELEMENT,
 	RECENT_SEARCHES_LIST,
@@ -89,4 +92,7 @@ export function addToFavorites(id) {
 export function removeFromFavorites(id) {
 	FAVORITES_LIST.delete(id);
 	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
+	if (MODAL_WINDOW.children.length !== 0) {
+		FAVORITES.renderFavoritesProducts();
+	}
 }

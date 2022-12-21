@@ -1,4 +1,4 @@
-import {BASE_URL} from './consts';
+import {BASE_URL, FAVORITES_LIST} from './consts';
 
 export class Api {
 	
@@ -9,11 +9,26 @@ export class Api {
 					return response.json();
 				});
 		} catch (e) {
-			return e.message; //Some Comment 
+			alert(e.message);
 		}
 	}
 	
 	#getRequestString({page, pageSize, query}) {
 		return `${BASE_URL}?page=${page}&per_page=${pageSize}&beer_name=${query}`;
+	}
+	
+	getProductsByIds() {
+		const ids = this.#getFavoritesIdsString();
+		try {
+			return fetch(`${BASE_URL}${ids}`).then((response) => {
+				return response.json();
+			});
+		} catch (e) {
+			alert(e.message);
+		}
+	}
+	
+	#getFavoritesIdsString() {
+		return Array.from(FAVORITES_LIST).reduce((acc, cur) => acc + `${cur}|`, '?ids=');
 	}
 }
