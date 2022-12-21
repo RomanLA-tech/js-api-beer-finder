@@ -92,7 +92,6 @@ export function addToFavorites(id) {
 export function removeFromFavorites(id) {
 	FAVORITES_LIST.delete(id);
 	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
-	console.log(MODAL_WINDOW.children);
 	if (MODAL_WINDOW.children.length !== 0) {
 		FAVORITES.renderFavoritesProducts();
 	}
