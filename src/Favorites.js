@@ -1,11 +1,11 @@
-import {API, FAVORITES_LIST, MODAL_CONTENT, MODAL_WINDOW, PRODUCTS_LIST} from './consts';
+import {API, MODAL_CONTENT, MODAL_WINDOW, PRODUCTS_LIST, STORE} from './consts';
 import {getProductCardTemplate} from './templates';
 import {LOADED_PRODUCTS} from './utils';
 
 export class Favorites {
 	
-	constructor(FAVORITES_LIST) {
-		this.cachedFavorites = Array.from(FAVORITES_LIST);
+	constructor() {
+		this.cachedFavorites = STORE.getFavorites();
 	}
 	
 	renderFavoritesProducts() {
@@ -29,16 +29,16 @@ export class Favorites {
 	}
 	
 	addToFavorites(id) {
-		FAVORITES_LIST.add(id);
-		this.cachedFavorites = Array.from(FAVORITES_LIST);
+		STORE.saveFavorite(id);
+		this.cachedFavorites = STORE.getFavorites();
 		PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
 		if (MODAL_WINDOW.children.length !== 0) {
-			this.renderFavoritesProducts(Array.from(FAVORITES_LIST));
+			this.renderFavoritesProducts(STORE.getFavorites());
 		}
 	}
 	
 	removeFromFavorites(id) {
-		FAVORITES_LIST.delete(id);
+		STORE.removeFromFavorites(id);
 		PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
 		if (MODAL_WINDOW.children.length !== 0) {
 			this.renderFavoritesProducts(this.cachedFavorites);

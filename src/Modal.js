@@ -1,6 +1,4 @@
-import {
-	MODAL_CONTENT, MODAL_WINDOW,
-} from './consts';
+import {MODAL_CONTENT, MODAL_WINDOW} from './consts';
 
 export class Modal {
 	

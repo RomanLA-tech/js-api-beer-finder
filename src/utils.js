@@ -1,14 +1,7 @@
-import {
-	API,
-	PRODUCTS_LIST,
-	PRODUCTS_LIST_ELEMENT,
-	RECENT_SEARCHES_LIST,
-	RECENTLY_SEARCHED_LIST_ELEMENT,
-	SEARCH_INPUT,
-	TO_TOP_BTN
-} from './consts';
 import {getLoadMoreButton, getNoItemLeftMessage, getRecentlySearchedItem} from './templates';
-
+import {
+	API, PRODUCTS_LIST, PRODUCTS_LIST_ELEMENT, RECENTLY_SEARCHED_LIST_ELEMENT, SEARCH_INPUT, STORE, TO_TOP_BTN
+} from './consts';
 
 let CURRENT_PAGE = 1;
 export let LOADED_PRODUCTS = [];
@@ -22,8 +15,8 @@ export async function getProducts() {
 		LOADED_PRODUCTS = [...items];
 		PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
 		PRODUCTS_LIST_ELEMENT.scrollIntoView();
-		RECENT_SEARCHES_LIST.add(query);
-		renderRecentlySearchedList(RECENT_SEARCHES_LIST);
+		STORE.saveRecentlySearched(query);
+		renderRecentlySearchedList(STORE.getRecentlySearched());
 	});
 }
 
