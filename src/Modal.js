@@ -7,7 +7,7 @@ export class Modal {
 	openModal() {
 		MODAL_WINDOW.classList.remove('hide');
 		document.addEventListener('keyup', (e) => {
-			this.#closeTaskByESC(e);
+			this.#closeByESC(e);
 		});
 	}
 	
@@ -16,7 +16,7 @@ export class Modal {
 		MODAL_WINDOW.classList.add('hide');
 	}
 	
-	#closeTaskByESC(e) {
+	#closeByESC(e) {
 		if (e.code === 'Escape') {
 			this.closeModal();
 		}
