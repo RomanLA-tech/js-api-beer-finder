@@ -75,7 +75,7 @@ export function renderRecentlySearchedList(items) {
 	recentlyList.append(recentlyListTitle)
 	
 	RECENTLY_SEARCHED_LIST_ELEMENT.append(recentlyList);
-	[...items].forEach((item) => {
+	Array.from(items).forEach((item) => {
 		recentlyList.append(getRecentlySearchedItem(item));
 	});
 }
