@@ -84,7 +84,6 @@ export function renderRecentlySearchedList(items) {
 export function addToFavorites(id) {
 	FAVORITES_LIST.add(id);
 	PRODUCTS_LIST.renderProductList(LOADED_PRODUCTS);
-	console.log(FAVORITES_LIST);
 }
 
 export function removeFromFavorites(id) {
