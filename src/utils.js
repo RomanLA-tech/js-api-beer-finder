@@ -30,13 +30,13 @@ async function loadMoreProducts() {
 	let page = ++CURRENT_PAGE;
 	await API.getProductByQuery({query, page}).then((res) => {
 		if (res.length < 10) {
-			STORE.saveLoadedProducts(...res);
+			STORE.saveLoadedProducts(res);
 			PRODUCTS_LIST.renderProductList(STORE.getLoadedProducts());
 			PRODUCTS_LIST_ELEMENT.removeChild(PRODUCTS_LIST_ELEMENT.lastChild);
 			PRODUCTS_LIST_ELEMENT.append(getNoItemLeftMessage());
 		}
 		else {
-			STORE.saveLoadedProducts(...res);
+			STORE.saveLoadedProducts(res);
 			PRODUCTS_LIST.renderProductList(STORE.getLoadedProducts());
 		}
 	});

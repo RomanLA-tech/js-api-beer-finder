@@ -143,8 +143,9 @@ main {
 /*PRODUCT*/
 .products-list__container {
     width: 50vw;
-    display: grid;
-    grid-gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
     grid-template-columns: 1fr 1fr;
     justify-self: center;
     align-self: center;
@@ -221,8 +222,7 @@ main {
 .no-items-left-message {
     font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 1rem;
-    transform: translateX(16vw);
+    margin: 2rem;
 }
 
 .to-top-btn {
