@@ -24,6 +24,16 @@ export class Api {
 		}
 	}
 	
+	getSingleProductById(productId) {
+		try {
+			return fetch(`${BASE_URL}/${productId}`).then((response) => {
+				return response.json();
+			});
+		} catch (e) {
+			alert(e.message);
+		}
+	}
+	
 	#getRequestString({page, pageSize, query}) {
 		return `${BASE_URL}?page=${page}&per_page=${pageSize}&beer_name=${query}`;
 	}

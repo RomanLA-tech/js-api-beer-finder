@@ -1,6 +1,7 @@
 import {ProductsList} from './ProductsList';
 import {Api} from './Api';
 import {Modal} from './Modal';
+import {Product} from './Product';
 
 export const BASE_URL = 'https://api.punkapi.com/v2/beers';
 
@@ -10,6 +11,7 @@ export const FAVORITES_LIST = new Set();
 export const PRODUCTS_LIST = new ProductsList();
 export const MODAL = new Modal();
 export const API = new Api();
+export const PRODUCT = new Product()
 
 export const MODAL_WINDOW = document.getElementById('modal');
 export const MODAL_CONTENT = MODAL_WINDOW.querySelector('#modal-content');

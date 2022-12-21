@@ -1,7 +1,9 @@
-import {API, FAVORITES_LIST, PRODUCTS_LIST, SEARCH_INPUT} from './consts';
+import {API, FAVORITES_LIST, PRODUCT, PRODUCTS_LIST, SEARCH_INPUT} from './consts';
 import {Favorites} from './Favorites';
 
 export function getProductCardTemplate(product) {
+	const addToFavoriteBtn = getAddToFavoriteBtn(product.id)
+	
 	const productCard = document.createElement('article');
 	productCard.classList.add('product__container');
 	productCard.dataset.id = product.id;
@@ -9,26 +11,13 @@ export function getProductCardTemplate(product) {
 	const cardTitle = document.createElement('h3');
 	cardTitle.classList.add('product-card__title');
 	cardTitle.innerText = product.name;
+	cardTitle.addEventListener('click', () => {
+		PRODUCT.openProductModal(product.id);
+	});
 	
 	const cardImage = document.createElement('img');
 	cardImage.classList.add('product-card__image');
 	cardImage.src = product.image_url;
-	
-	const addToFavoriteBtn = document.createElement('button');
-	addToFavoriteBtn.classList.add('product-card__add-to-favorites-btn');
-	if (FAVORITES_LIST.has(product.id)) {
-		addToFavoriteBtn.addEventListener('click', () => {
-			new Favorites(FAVORITES_LIST).removeFromFavorites(product.id);
-		});
-		addToFavoriteBtn.innerText = 'Remove';
-		addToFavoriteBtn.classList.add('delete-btn');
-	}
-	else {
-		addToFavoriteBtn.addEventListener('click', () => {
-			new Favorites(FAVORITES_LIST).addToFavorites(product.id);
-		});
-		addToFavoriteBtn.innerText = 'Add to favorites';
-	}
 	
 	const cardDescription = document.createElement('p');
 	cardDescription.classList.add('product_card__description');
@@ -68,4 +57,47 @@ export function getRecentlySearchedItem(value) {
 	});
 	
 	return element;
+}
+
+export function getSingleProductCardTemplate(product) {
+	const addToFavoriteBtn = getAddToFavoriteBtn(product.id)
+	
+	const card = document.createElement('div');
+	card.classList.add('card__container');
+	
+	const cardTitle = document.createElement('h3');
+	cardTitle.classList.add('card__title');
+	cardTitle.innerText = product.name;
+	
+	
+	const cardImage = document.createElement('img');
+	cardImage.classList.add('card__image');
+	cardImage.src = product.image_url;
+	
+	const cardDescription = document.createElement('p');
+	cardDescription.classList.add('card__description');
+	cardDescription.innerText = product.description;
+	
+	card.append(cardTitle, cardImage, addToFavoriteBtn, cardDescription);
+	
+	return card;
+}
+
+function getAddToFavoriteBtn(id) {
+	const addToFavoriteBtn = document.createElement('button');
+	addToFavoriteBtn.classList.add('product-card__add-to-favorites-btn');
+	if (FAVORITES_LIST.has(id)) {
+		addToFavoriteBtn.addEventListener('click', () => {
+			new Favorites(FAVORITES_LIST).removeFromFavorites(id);
+		});
+		addToFavoriteBtn.innerText = 'Remove';
+		addToFavoriteBtn.classList.add('delete-btn');
+	}
+	else {
+		addToFavoriteBtn.addEventListener('click', () => {
+			new Favorites(FAVORITES_LIST).addToFavorites(id);
+		});
+		addToFavoriteBtn.innerText = 'Add to favorites';
+	}
+	return addToFavoriteBtn
 }
