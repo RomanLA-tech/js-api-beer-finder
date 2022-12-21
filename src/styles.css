@@ -175,7 +175,6 @@ main {
 }
 
 .product-card__image {
-    border-radius: 4px;
     padding: 5px;
     width: 15vw;
     height: 20vw;
@@ -271,6 +270,35 @@ main {
 
 .hide {
     display: none;
+}
+
+/*SINGLE PRODUCT CARD*/
+
+.card__container {
+    display: flex;
+    width: 50vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card__title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.card__image {
+    padding: 5px;
+    width: 20vw;
+    height: 25vw;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.card__description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
 }
 
 
