@@ -1,8 +1,8 @@
-import {API, FAVORITES_LIST, PRODUCT, PRODUCTS_LIST, SEARCH_INPUT} from './consts';
+import {API, PRODUCT, PRODUCTS_LIST, SEARCH_INPUT, STORE} from './consts';
 import {Favorites} from './Favorites';
 
 export function getProductCardTemplate(product) {
-	const addToFavoriteBtn = getAddToFavoriteBtn(product.id)
+	const addToFavoriteBtn = getAddToFavoriteBtn(product.id);
 	
 	const productCard = document.createElement('article');
 	productCard.classList.add('product__container');
@@ -60,7 +60,7 @@ export function getRecentlySearchedItem(value) {
 }
 
 export function getSingleProductCardTemplate(product) {
-	const addToFavoriteBtn = getAddToFavoriteBtn(product.id)
+	const addToFavoriteBtn = getAddToFavoriteBtn(product.id);
 	
 	const card = document.createElement('div');
 	card.classList.add('card__container');
@@ -86,18 +86,18 @@ export function getSingleProductCardTemplate(product) {
 function getAddToFavoriteBtn(id) {
 	const addToFavoriteBtn = document.createElement('button');
 	addToFavoriteBtn.classList.add('product-card__add-to-favorites-btn');
-	if (FAVORITES_LIST.has(id)) {
+	if (STORE.getFavorites().includes(id)) {
 		addToFavoriteBtn.addEventListener('click', () => {
-			new Favorites(FAVORITES_LIST).removeFromFavorites(id);
+			new Favorites(STORE.getFavorites()).removeFromFavorites(id);
 		});
 		addToFavoriteBtn.innerText = 'Remove';
 		addToFavoriteBtn.classList.add('delete-btn');
 	}
 	else {
 		addToFavoriteBtn.addEventListener('click', () => {
-			new Favorites(FAVORITES_LIST).addToFavorites(id);
+			new Favorites().addToFavorites(id);
 		});
 		addToFavoriteBtn.innerText = 'Add to favorites';
 	}
-	return addToFavoriteBtn
+	return addToFavoriteBtn;
 }
