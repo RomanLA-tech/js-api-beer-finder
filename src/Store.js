@@ -14,7 +14,7 @@ export class Store {
 	
 	saveFavorite(id) {
 		const oldState = this.getFavorites();
-		console.log(this.getFavorites())
+		console.log(this.getFavorites());
 		const newState = new Set([id, ...oldState]);
 		localStorage.setItem('favorites', JSON.stringify([...newState]));
 	}
@@ -38,6 +38,6 @@ export class Store {
 	}
 	
 	clearLoadedProducts() {
-		localStorage.setItem('loaded', JSON.stringify([]))
+		localStorage.setItem('loaded', JSON.stringify([]));
 	}
 }

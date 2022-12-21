@@ -6,12 +6,12 @@ import {
 let CURRENT_PAGE = 1;
 
 export async function getProducts() {
-	STORE.clearLoadedProducts()
+	STORE.clearLoadedProducts();
 	CURRENT_PAGE = 1;
 	const query = SEARCH_INPUT.value;
 	const products = API.getProductByQuery({query});
 	await products.then(items => {
-		STORE.saveLoadedProducts(items)
+		STORE.saveLoadedProducts(items);
 		PRODUCTS_LIST.renderProductList(STORE.getLoadedProducts());
 		PRODUCTS_LIST_ELEMENT.scrollIntoView();
 		STORE.saveRecentlySearched(query);
@@ -30,13 +30,13 @@ async function loadMoreProducts() {
 	let page = ++CURRENT_PAGE;
 	await API.getProductByQuery({query, page}).then((res) => {
 		if (res.length < 10) {
-			STORE.saveLoadedProducts(...res)
+			STORE.saveLoadedProducts(...res);
 			PRODUCTS_LIST.renderProductList(STORE.getLoadedProducts());
 			PRODUCTS_LIST_ELEMENT.removeChild(PRODUCTS_LIST_ELEMENT.lastChild);
 			PRODUCTS_LIST_ELEMENT.append(getNoItemLeftMessage());
 		}
 		else {
-			STORE.saveLoadedProducts(...res)
+			STORE.saveLoadedProducts(...res);
 			PRODUCTS_LIST.renderProductList(STORE.getLoadedProducts());
 		}
 	});

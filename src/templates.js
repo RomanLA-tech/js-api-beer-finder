@@ -51,6 +51,8 @@ export function getRecentlySearchedItem(value) {
 	element.innerText = value;
 	element.addEventListener('click', () => {
 		API.getProductByQuery({query: value}).then((res) => {
+			STORE.clearLoadedProducts()
+			STORE.saveLoadedProducts(res)
 			SEARCH_INPUT.value = value;
 			PRODUCTS_LIST.renderProductList(res);
 		});
