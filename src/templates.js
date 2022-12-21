@@ -12,7 +12,6 @@ export function getProductCardTemplate(product) {
 	cardTitle.classList.add('product-card__title');
 	cardTitle.innerText = product.name;
 	cardTitle.addEventListener('click', () => {
-		console.log(product.id);
 		PRODUCT.openProductModal(product.id);
 	});
 	
